@@ -8,12 +8,12 @@ import { TodoFooter } from './components/TodoFooter';
 import { TodoErrorNotification } from './components/TodoErrorNotification';
 import { Todo } from './types/Todo';
 import { ErrorState } from './types/ErrorState';
-import { FilterTypes } from './types/FilterTypes';
+import { Filter } from './enums/Filter';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [userInput, setUserInput] = useState('');
-  const [filterType, setFilterType] = useState<FilterTypes>('all');
+  const [filterType, setFilterType] = useState<Filter>(Filter.All);
   const [errorState, setErrorState] = useState<ErrorState>({
     message: '',
     isVisible: false,
@@ -22,15 +22,15 @@ export const App: React.FC = () => {
   const [todosToDelete, setTodosToDelete] = useState<number[] | null>([]);
   const newTodoField = useRef<HTMLInputElement>(null);
 
-  const getPreparedTodos = (type: FilterTypes): Todo[] => {
+  const getPreparedTodos = (type: Filter): Todo[] => {
     let preparedTodos = [...todos];
 
     if (type) {
       preparedTodos = preparedTodos.filter(todo => {
         switch (type) {
-          case 'active':
+          case Filter.Active:
             return !todo.completed;
-          case 'completed':
+          case Filter.Completed:
             return todo.completed;
           default:
             return true;

@@ -1,11 +1,12 @@
 import './TodoFooter.scss';
 import { FilterTypes } from '../../types/FilterTypes';
 import { clsx } from 'clsx';
+import { Filter } from '../../enums/Filter';
 
 interface Props {
   activeTodos: number;
   filterType: FilterTypes;
-  onFilterTypeChange: (type: FilterTypes) => void;
+  onFilterTypeChange: (type: Filter) => void;
   hasCompletedTodos: boolean;
   handleClearCompleted: () => void;
 }
@@ -28,10 +29,10 @@ export const TodoFooter = ({
         <a
           href="#/"
           className={clsx('filter__link', {
-            selected: filterType === 'all',
+            selected: filterType === Filter.All,
           })}
           data-cy="FilterLinkAll"
-          onClick={() => onFilterTypeChange('all')}
+          onClick={() => onFilterTypeChange(Filter.All)}
         >
           All
         </a>
@@ -39,10 +40,10 @@ export const TodoFooter = ({
         <a
           href="#/active"
           className={clsx('filter__link', {
-            selected: filterType === 'active',
+            selected: filterType === Filter.Active,
           })}
           data-cy="FilterLinkActive"
-          onClick={() => onFilterTypeChange('active')}
+          onClick={() => onFilterTypeChange(Filter.Active)}
         >
           Active
         </a>
@@ -50,10 +51,10 @@ export const TodoFooter = ({
         <a
           href="#/completed"
           className={clsx('filter__link', {
-            selected: filterType === 'completed',
+            selected: filterType === Filter.Completed,
           })}
           data-cy="FilterLinkCompleted"
-          onClick={() => onFilterTypeChange('completed')}
+          onClick={() => onFilterTypeChange(Filter.Completed)}
         >
           Completed
         </a>
